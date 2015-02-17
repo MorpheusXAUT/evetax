@@ -16,6 +16,9 @@ type Connection interface {
 	// RawQuery performs a raw database query and returns a map of interfaces containing the retrieve data. An error is returned if the query failed
 	RawQuery(query string, v ...interface{}) ([]map[string]interface{}, error)
 
+	// LoadAllLootPastes retrieves all loot pastes from the database, returning an error if the query failed
+	LoadAllLootPastes() ([]*models.LootPaste, error)
+
 	// SaveLootPaste saves a loot paste to the database, returning the updated model or an error if the query failed
 	SaveLootPaste(lootPaste *models.LootPaste) (*models.LootPaste, error)
 }

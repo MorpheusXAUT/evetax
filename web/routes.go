@@ -32,6 +32,12 @@ func SetupRoutes(controller *Controller) []Route {
 			HandlerFunc: controller.TaxesPostHandler,
 		},
 		Route{
+			Name:        "ReportGetHandler",
+			Methods:     []string{"GET"},
+			Pattern:     "/report",
+			HandlerFunc: controller.ReportGetHandler,
+		},
+		Route{
 			Name:        "LegalGet",
 			Methods:     []string{"GET"},
 			Pattern:     "/legal",

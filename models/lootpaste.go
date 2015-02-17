@@ -13,28 +13,29 @@ import (
 
 // LootPaste stores all required information about the loot paste
 type LootPaste struct {
-	ID         int64
-	Character  string
-	RawPaste   string
-	Comment    string
-	TotalValue int
-	TaxAmount  int
+	ID            int64
+	CharacterName string
+	RawPaste      string
+	PasteComment  string
+	TotalValue    int
+	TaxAmount     int
 }
 
 // NewLootPaste creates a new loot paste with the given values
 func NewLootPaste(character string, rawPaste string, comment string) *LootPaste {
 	lootPaste := &LootPaste{
-		ID:         -1,
-		Character:  character,
-		RawPaste:   rawPaste,
-		Comment:    comment,
-		TotalValue: 0,
-		TaxAmount:  0,
+		ID:            -1,
+		CharacterName: character,
+		RawPaste:      rawPaste,
+		PasteComment:  comment,
+		TotalValue:    0,
+		TaxAmount:     0,
 	}
 
 	return lootPaste
 }
 
+// FetchValue transmits the given loot paste to evepraisal and retrieves its values
 func (lootPaste *LootPaste) FetchValue() error {
 	lootID, err := lootPaste.PasteLoot()
 	if err != nil {
@@ -49,6 +50,7 @@ func (lootPaste *LootPaste) FetchValue() error {
 	return nil
 }
 
+// PasteLoot sends the given loot to evepraisal and retrieves the evepraisal ID
 func (lootPaste *LootPaste) PasteLoot() (string, error) {
 	data := url.Values{}
 	data.Set("raw_paste", lootPaste.RawPaste)
@@ -75,6 +77,7 @@ func (lootPaste *LootPaste) PasteLoot() (string, error) {
 	return resultID[1], nil
 }
 
+// RetrieveLootValue fetches the evepraisal of the posted loot and parses the result
 func (lootPaste *LootPaste) RetrieveLootValue(lootID string) error {
 	resp, err := http.Get(fmt.Sprintf("http://evepraisal.com/e/%s.json", lootID))
 	if err != nil {

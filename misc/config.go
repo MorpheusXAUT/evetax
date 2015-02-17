@@ -31,6 +31,8 @@ type Configuration struct {
 	HTTPHost string
 	// TaxPercentage represents the percentage of tax taken per loot paste
 	TaxPercentage int
+	// TaxReportCode represents the access code for the taxes report
+	TaxReportCode string
 }
 
 // LoadConfig creates a Configuration by either using commandline flags or a configuration file, returning an error if the parsing failed

@@ -64,15 +64,27 @@ func (c *DatabaseConnection) RawQuery(query string, v ...interface{}) ([]map[str
 	return results, nil
 }
 
+// LoadAllLootPastes retrieves all loot pastes from the MySQL database, returning an error if the query failed
+func (c *DatabaseConnection) LoadAllLootPastes() ([]*models.LootPaste, error) {
+	var lootpastes []*models.LootPaste
+
+	err := c.conn.Select(&lootpastes, "SELECT id, charactername, rawpaste, pastecomment, totalvalue, taxamount FROM lootpastes")
+	if err != nil {
+		return nil, err
+	}
+
+	return lootpastes, nil
+}
+
 // SaveLootPaste saves a loot paste to the MySQL database, returning the updated model or an error if the query failed
 func (c *DatabaseConnection) SaveLootPaste(lootPaste *models.LootPaste) (*models.LootPaste, error) {
 	if lootPaste.ID > 0 {
-		_, err := c.conn.Exec("UPDATE lootpastes SET characterName=?, rawpaste=?, pasteComment=?, totalvalue=?, taxamount=? WHERE id=?", lootPaste.Character, lootPaste.RawPaste, lootPaste.Comment, lootPaste.TotalValue, lootPaste.TaxAmount, lootPaste.ID)
+		_, err := c.conn.Exec("UPDATE lootpastes SET charactername=?, rawpaste=?, pastecomment=?, totalvalue=?, taxamount=? WHERE id=?", lootPaste.CharacterName, lootPaste.RawPaste, lootPaste.PasteComment, lootPaste.TotalValue, lootPaste.TaxAmount, lootPaste.ID)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		resp, err := c.conn.Exec("INSERT INTO lootpastes(characterName, rawpaste, pasteComment, totalvalue, taxamount) VALUES(?, ?, ?, ?, ?)", lootPaste.Character, lootPaste.RawPaste, lootPaste.Comment, lootPaste.TotalValue, lootPaste.TaxAmount)
+		resp, err := c.conn.Exec("INSERT INTO lootpastes(charactername, rawpaste, pastecomment, totalvalue, taxamount) VALUES(?, ?, ?, ?, ?)", lootPaste.CharacterName, lootPaste.RawPaste, lootPaste.PasteComment, lootPaste.TotalValue, lootPaste.TaxAmount)
 		if err != nil {
 			return nil, err
 		}

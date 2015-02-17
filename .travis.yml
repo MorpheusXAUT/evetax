@@ -8,4 +8,5 @@ go:
 
 install:
   - go get -d -v ./...
+  - go get -d -v gopkg.in/boj/redistore.v1
   - go get -d -v github.com/smartystreets/goconvey
