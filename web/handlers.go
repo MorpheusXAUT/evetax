@@ -69,13 +69,7 @@ func (controller *Controller) TaxesPostHandler(w http.ResponseWriter, r *http.Re
 		return
 	}
 
-	misc.Logger.Println(lootPaste.TotalValue)
-	misc.Logger.Println(controller.Config.TaxPercentage)
-	misc.Logger.Println((lootPaste.TotalValue * controller.Config.TaxPercentage) / 100.0)
-
 	lootPaste.TaxAmount = int((lootPaste.TotalValue * controller.Config.TaxPercentage) / 100.0)
-
-	misc.Logger.Println(lootPaste.TaxAmount)
 
 	lootPaste, err = controller.Database.SaveLootPaste(lootPaste)
 	if err != nil {
