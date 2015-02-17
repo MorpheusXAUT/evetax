@@ -1,0 +1,27 @@
+{{ define "taxes" }}
+{{ template "header" . }}
+{{ template "navigation" . }}
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3>Tax details</h3>
+	</div>
+	<div class="panel-body">
+		<table class="table table-striped table-hover">
+			<thead>
+				<th>#</th>
+				<th>Character</th>
+				<th>Comment</th>
+				<th>Total Value</th>
+				<th>Tax Amount</th>
+			</thead>
+			<tbody>
+				<td>{{ .lootPaste.ID }}</td>
+				<td>{{ .lootPaste.Character }}</td>
+				<td>{{ .lootPaste.Comment }}</td>
+				<td align="right">{{ FormatISK .lootPaste.TotalValue }}</td>
+				<td class="danger" align="right">{{ FormatISK .lootPaste.TaxAmount }}</td>
+		</table>
+	</div>
+</div>
+{{ template "footer" . }}
+{{ end }}

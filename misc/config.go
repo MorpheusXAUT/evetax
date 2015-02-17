@@ -29,6 +29,8 @@ type Configuration struct {
 	DebugTemplates bool
 	// HTTPHost represents the hostname:port the application should listen to for requests
 	HTTPHost string
+	// TaxPercentage represents the percentage of tax taken per loot paste
+	TaxPercentage int
 }
 
 // LoadConfig creates a Configuration by either using commandline flags or a configuration file, returning an error if the parsing failed

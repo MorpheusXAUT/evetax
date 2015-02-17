@@ -1,0 +1,36 @@
+{{ define "index" }}
+{{ template "header" . }}
+{{ template "navigation" . }}
+<div class="panel panel-info">
+	<div class="panel-heading">
+		<h3>Corp Tax Calculations</h3>
+	</div>
+	<div class="panel-body">
+		<p>
+			You can use this form to paste all your loot, profit or other gather resources and have the appropriate tax payments to corp calculated for you.<br />
+			Please only post Additional notes regarding this loot paste can be added, although they are not required.</p>
+	</div>
+</div>
+<div class="panel panel-default">
+	<div class="panel-body">
+		<form role="form-horizontal" action="/taxes" method="post">
+			<div class="form-group">
+				<label for="lootCharacter">Character</label>
+				<input type="text" class="form-control" id="lootCharacter" name="character" placeholder="Enter (main) character" required="required" />
+			</div>
+			<div class="form-group">
+				<label for="lootRawPaste">Loot Paste</label>
+				<textarea class="form-control" id="lootRawPaste" name="rawPaste" placeholder="Paste all loot or profit into here" rows="7" required="required"></textarea>
+			</div>
+			<div class="form-group">
+				<label for="lootComment">Comment</label>
+				<textarea class="form-control" id="lootComment" name="comment" placeholder="(Optional) comment regarding your loot paste" rows="2"></textarea>
+			</div>
+			<div class="form-group" align="center">
+				<button type="submit" class="btn btn-success">Submit</button>
+			</div>
+		</form>
+	</div>
+</div>
+{{ template "footer" . }}
+{{ end }}
