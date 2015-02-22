@@ -19,6 +19,10 @@ body > .container {
  	padding: 65px 15px 0;
 }
 
+body > .container-fluid {
+ 	padding: 65px 15px 0;
+}
+
 .container .text-muted {
 	margin: 10px 0;
 }

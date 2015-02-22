@@ -9,6 +9,7 @@ import (
 	"net/url"
 	"regexp"
 	"strconv"
+	"time"
 )
 
 // LootPaste stores all required information about the loot paste
@@ -19,6 +20,7 @@ type LootPaste struct {
 	PasteComment  string
 	TotalValue    int
 	TaxAmount     int
+	Timestamp     time.Time
 }
 
 // NewLootPaste creates a new loot paste with the given values
@@ -30,6 +32,7 @@ func NewLootPaste(character string, rawPaste string, comment string) *LootPaste 
 		PasteComment:  comment,
 		TotalValue:    0,
 		TaxAmount:     0,
+		Timestamp:     time.Now(),
 	}
 
 	return lootPaste

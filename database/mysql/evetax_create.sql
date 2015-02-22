@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS `lootpastes` (
   `pastecomment` text NOT NULL,
   `totalvalue` bigint(20) NOT NULL,
   `taxamount` bigint(20) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

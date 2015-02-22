@@ -68,7 +68,7 @@ func (c *DatabaseConnection) RawQuery(query string, v ...interface{}) ([]map[str
 func (c *DatabaseConnection) LoadAllLootPastes() ([]*models.LootPaste, error) {
 	var lootpastes []*models.LootPaste
 
-	err := c.conn.Select(&lootpastes, "SELECT id, charactername, rawpaste, pastecomment, totalvalue, taxamount FROM lootpastes")
+	err := c.conn.Select(&lootpastes, "SELECT id, charactername, rawpaste, pastecomment, totalvalue, taxamount, timestamp FROM lootpastes")
 	if err != nil {
 		return nil, err
 	}
@@ -79,12 +79,12 @@ func (c *DatabaseConnection) LoadAllLootPastes() ([]*models.LootPaste, error) {
 // SaveLootPaste saves a loot paste to the MySQL database, returning the updated model or an error if the query failed
 func (c *DatabaseConnection) SaveLootPaste(lootPaste *models.LootPaste) (*models.LootPaste, error) {
 	if lootPaste.ID > 0 {
-		_, err := c.conn.Exec("UPDATE lootpastes SET charactername=?, rawpaste=?, pastecomment=?, totalvalue=?, taxamount=? WHERE id=?", lootPaste.CharacterName, lootPaste.RawPaste, lootPaste.PasteComment, lootPaste.TotalValue, lootPaste.TaxAmount, lootPaste.ID)
+		_, err := c.conn.Exec("UPDATE lootpastes SET charactername=?, rawpaste=?, pastecomment=?, totalvalue=?, taxamount=?, timestamp=? WHERE id=?", lootPaste.CharacterName, lootPaste.RawPaste, lootPaste.PasteComment, lootPaste.TotalValue, lootPaste.TaxAmount, lootPaste.Timestamp, lootPaste.ID)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		resp, err := c.conn.Exec("INSERT INTO lootpastes(charactername, rawpaste, pastecomment, totalvalue, taxamount) VALUES(?, ?, ?, ?, ?)", lootPaste.CharacterName, lootPaste.RawPaste, lootPaste.PasteComment, lootPaste.TotalValue, lootPaste.TaxAmount)
+		resp, err := c.conn.Exec("INSERT INTO lootpastes(charactername, rawpaste, pastecomment, totalvalue, taxamount, timestamp) VALUES(?, ?, ?, ?, ?, ?)", lootPaste.CharacterName, lootPaste.RawPaste, lootPaste.PasteComment, lootPaste.TotalValue, lootPaste.TaxAmount, lootPaste.Timestamp)
 		if err != nil {
 			return nil, err
 		}

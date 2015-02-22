@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/dustin/go-humanize"
 )
@@ -37,9 +38,10 @@ func (templates *Templates) ExecuteTemplates(w http.ResponseWriter, r *http.Requ
 // TemplateFunctions prepares a map of functions to be used within templates
 func (templates *Templates) TemplateFunctions(r *http.Request) template.FuncMap {
 	return template.FuncMap{
-		"IsResultNil": func(r interface{}) bool { return templates.IsResultNil(r) },
-		"FormatISK":   func(i int) string { return templates.FormatISK(i) },
-		"FormatFloat": func(f float64) string { return templates.FormatFloat(f) },
+		"IsResultNil":     func(r interface{}) bool { return templates.IsResultNil(r) },
+		"FormatISK":       func(i int) string { return templates.FormatISK(i) },
+		"FormatFloat":     func(f float64) string { return templates.FormatFloat(f) },
+		"FormatTimestamp": func(t time.Time) string { return templates.FormatTimestamp(t) },
 	}
 }
 
@@ -83,4 +85,9 @@ func (templates *Templates) FormatFloat(f float64) string {
 	}
 
 	return formattedFloat
+}
+
+// FormatTimestamp formats the given time.Time into a shorter timestamp
+func (templates *Templates) FormatTimestamp(t time.Time) string {
+	return t.Format("2006-01-02 15:04")
 }

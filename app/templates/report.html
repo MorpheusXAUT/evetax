@@ -15,6 +15,7 @@
 					<th>Loot Paste</th>
 					<th>Total Value</th>
 					<th>Tax Amount</th>
+					<th>Timestamp</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -22,12 +23,14 @@
 				<tr>
 					<td>{{ $lootPaste.ID }}</td>
 					<td>{{ $lootPaste.CharacterName }}</td>
-					<td>{{ $lootPaste.PasteComment }}</td>
+					<td><textarea class="form-control" rows="1" readonly="readonly">{{ $lootPaste.PasteComment }}</textarea></td>
 					<td><textarea class="form-control" rows="1" readonly="readonly">{{ $lootPaste.RawPaste }}</textarea></td>
 					<td align="right">{{ FormatISK $lootPaste.TotalValue }}</td>
 					<td align="right">{{ FormatISK $lootPaste.TaxAmount }}</td>
+					<td>{{ FormatTimestamp $lootPaste.Timestamp }}</td>
 				</tr>
 				{{ end }}
+			</tbody>
 		</table>
 	</div>
 </div>
