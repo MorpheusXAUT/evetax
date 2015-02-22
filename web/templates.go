@@ -54,7 +54,7 @@ func (templates *Templates) IsResultNil(r interface{}) bool {
 func (templates *Templates) FormatISK(i int) string {
 	floatValue := float64(i) / 100.0
 
-	return fmt.Sprintf("%s ISK", templates.FormatFloat(floatValue))
+	return fmt.Sprintf("%s", templates.FormatFloat(floatValue))
 }
 
 // FormatFloat formats a given floating point number to a human readable string

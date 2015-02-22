@@ -68,7 +68,7 @@ func (c *DatabaseConnection) RawQuery(query string, v ...interface{}) ([]map[str
 func (c *DatabaseConnection) LoadAllLootPastes() ([]*models.LootPaste, error) {
 	var lootpastes []*models.LootPaste
 
-	err := c.conn.Select(&lootpastes, "SELECT id, charactername, rawpaste, pastecomment, totalvalue, taxamount, timestamp FROM lootpastes ORDER BY id DESC")
+	err := c.conn.Select(&lootpastes, "SELECT id, charactername, rawpaste, pastecomment, totalvalue, taxamount, timestamp FROM lootpastes")
 	if err != nil {
 		return nil, err
 	}

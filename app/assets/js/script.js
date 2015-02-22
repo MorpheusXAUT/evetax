@@ -61,3 +61,12 @@ jQuery.fn.filterByText = function(textbox, selectSingleMatch) {
 		});
 	});
 };
+
+$(document).ready(function() {
+	$('#reportTable').dataTable({
+		"columnDefs": [{ "orderable": false, "targets": [ 2, 3 ] }],
+		"lengthMenu": [[ 10, 25, 50, 100, -1], [10, 25, 60, 100, "All"]],
+		"order": [[ 0, "desc" ]],
+		"pageLength": 25
+	});
+});
